@@ -1,0 +1,23 @@
+.listing-card {
+  border: 1px solid #ccc;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.listing-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.listing-info {
+  flex: 1;
+}
+
+.listing-image img {
+  width: 200px; 
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}

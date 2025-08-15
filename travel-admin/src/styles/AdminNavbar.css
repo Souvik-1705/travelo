@@ -1,0 +1,38 @@
+.admin-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e3a8a;
+  color: white;
+  padding: 1rem 2rem;
+}
+
+.admin-navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem;
+}
+
+.admin-navbar a:hover {
+  text-decoration: underline;
+}
+
+.admin-navbar-left h2 {
+  margin: 0;
+}
+
+.admin-navbar-center {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-navbar-right span {
+  font-weight: bold;
+}
