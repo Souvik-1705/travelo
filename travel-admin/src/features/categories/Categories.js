@@ -41,29 +41,41 @@ function Categories() {
 
   return (
     <>
-    <AdminNavbar/>
-    <div style={{ padding: "1rem" }}>
-      <h2>Manage Categories</h2>
-      <form onSubmit={handleSubmit} className="category-form">
-        <input
-          placeholder="Enter category name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <button type="submit">{editId ? "Update" : "Add"}</button>
-      </form>
+      <AdminNavbar />
+      <div style={{ padding: "1rem" }}>
+        <h2>Manage Categories</h2>
+        <form onSubmit={handleSubmit} className="category-form">
+          <input
+            placeholder="Enter category name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <button type="submit">{editId ? "Update" : "Add"}</button>
+        </form>
 
-      {loading && <p>Loading...</p>}
-      <ul className="category-list">
-        {categories.map((cat) => (
-          <li key={cat.id}>
-            {cat.name}{" "}
-            <button onClick={() => handleEdit(cat)}>Edit</button>{" "}
-            <button onClick={() => handleDelete(cat.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+        {loading && <p>Loading...</p>}
+        <ul className="category-list">
+          {categories.map((cat) => (
+            <li key={cat.id} className="category-row">
+              <span className="category-name">{cat.name}</span>
+              <div className="category-actions">
+                <button
+                  className="edit-btn"
+                  onClick={() => handleEdit(cat)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDelete(cat.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const DB_URL = "https://travel-website-7-default-rtdb.firebaseio.com/categories";
+const DB_URL = "https://travel-website-2ae60-default-rtdb.firebaseio.com/categories";
 
 export const fetchCategories = createAsyncThunk("categories/fetch", async () => {
   const res = await axios.get(`${DB_URL}.json`);

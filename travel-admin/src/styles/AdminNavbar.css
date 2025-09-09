@@ -2,29 +2,30 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1e3a8a;
+  background: #1e293b;
+  padding: 0.8rem 2rem;
   color: white;
-  padding: 1rem 2rem;
-}
-
-.admin-navbar a {
-  color: white;
-  text-decoration: none;
-  margin: 0 1rem;
-}
-
-.admin-navbar a:hover {
-  text-decoration: underline;
 }
 
 .admin-navbar-left h2 {
   margin: 0;
+  font-size: 1.4rem;
 }
 
 .admin-navbar-center {
-  flex-grow: 1;
   display: flex;
-  justify-content: center;
+  gap: 1.5rem;
+}
+
+.admin-navbar-center a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.admin-navbar-center a:hover {
+  color: #38bdf8; 
 }
 
 .admin-navbar-right {
@@ -33,6 +34,16 @@
   gap: 1rem;
 }
 
-.admin-navbar-right span {
-  font-weight: bold;
+.admin-navbar-right button {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.admin-navbar-right button:hover {
+  background: #dc2626;
 }

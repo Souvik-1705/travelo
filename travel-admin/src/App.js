@@ -54,6 +54,7 @@ function App() {
           path="/admin/bookings"
           element={<ProtectedRoute><Bookings /></ProtectedRoute>}
         />
+
       </Routes>
     </Suspense>
   );

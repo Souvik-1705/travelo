@@ -1,23 +1,143 @@
+.listings-container {
+  padding: 2rem;
+  background: #f9fafb;
+  min-height: 100vh;
+}
+
+.listings-heading {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #1e293b;
+}
+
+.listings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
 .listing-card {
-  border: 1px solid #ccc;
-  margin: 1rem;
-  padding: 1rem;
-}
-
-.listing-content {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none; /* remove underline */
+  color: inherit;
+  height: 100%; /* make all cards equal height in grid */
 }
 
-.listing-info {
-  flex: 1;
+.listing-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+.listing-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
 }
 
 .listing-image img {
-  width: 200px; 
-  height: auto;
-  border-radius: 8px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+}
+
+.price-tag {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: #2563eb;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.listing-info {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* make it grow to push bottom section down */
+}
+
+.listing-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.listing-location {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin: 4px 0;
+}
+
+.listing-description {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  color: #374151;
+  flex-grow: 1; /* push bottom section down */
+}
+
+.listing-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* stick to bottom */
+}
+
+.listing-status.available {
+  color: #16a34a; /* green tick */
+  font-weight: 500;
+}
+
+.listing-status.unavailable {
+  color: #dc2626; /* red cross */
+  font-weight: 500;
+}
+
+.listing-category {
+  font-size: 0.9rem;
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+}
+
+.listing-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.edit-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #1e40af;
+}
+
+.delete-btn {
+  background: #dc2626;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #991b1b;
 }

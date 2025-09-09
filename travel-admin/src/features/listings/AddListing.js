@@ -18,6 +18,7 @@ function AddListing() {
     address: "",
     description: "",
     categoryId: "",
+    googleLink: "", 
   });
 
   useEffect(() => {
@@ -61,6 +62,7 @@ function AddListing() {
       address: "",
       description: "",
       categoryId: "",
+      googleLink: "",
     });
     setImages([]);
   };
@@ -76,6 +78,7 @@ function AddListing() {
       <input name="pin" placeholder="PIN Code" onChange={handleChange} value={formData.pin} /><br />
       <input name="address" placeholder="Full Address" onChange={handleChange} value={formData.address} /><br />
       <textarea name="description" placeholder="Description" onChange={handleChange} value={formData.description}></textarea><br />
+      <input name="googleLink" placeholder="Google Maps/Details Link" onChange={handleChange} value={formData.googleLink}/><br />
       <select name="categoryId" onChange={handleChange} value={formData.categoryId}>
         <option value="">Select Category</option>
         {categories.map((cat) => (

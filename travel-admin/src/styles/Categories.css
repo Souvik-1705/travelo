@@ -1,23 +1,46 @@
-.category-form {
-  margin: 1rem 0;
-}
-
-.category-form input {
-  padding: 0.5rem;
-  margin-right: 0.5rem;
-  border-radius: 4px;
-  border: 1px solid #aaa;
-}
-
-.category-form button {
-  padding: 0.5rem 1rem;
-}
-
 .category-list {
   list-style: none;
   padding: 0;
+  margin-top: 1rem;
 }
 
-.category-list li {
-  margin: 0.5rem 0;
+.category-row {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  background: #fff;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.category-name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.category-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.edit-btn {
+  background-color: #2563eb;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #dc2626;
+  color: white;
 }
