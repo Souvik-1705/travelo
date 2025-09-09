@@ -11,7 +11,6 @@ function SearchBar({ onSearch }) {
     setTerm(value);
 
     if (!value) {
-      // 🔹 When search box is cleared → show categories only
       onSearch([], false);
       return;
     }

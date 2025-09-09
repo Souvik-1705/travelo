@@ -10,6 +10,7 @@ function Header() {
   const { email } = useSelector((state) => state.auth);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); 
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -24,27 +25,27 @@ function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  
-
-  const toggleDropdown = () => {
-    setDropdownOpen((prev) => !prev);
-  };
+  const toggleDropdown = () => setDropdownOpen(prev => !prev);
+  const toggleMenu = () => setMenuOpen(prev => !prev);
 
   return (
     <header className={`header ${scrolled ? "scrolled" : ""}`}>
-      {/* Left: Logo */}
       <div className="logo">
         <Link to="/" className="logo-text">TravelStay</Link>
       </div>
 
-      {/* Center: Navigation */}
-      <nav className="nav-links">
+      <div className="hamburger" onClick={toggleMenu}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <nav className={`nav-links ${menuOpen ? "active" : ""}`}>
         <Link to="/">Home</Link>
         <Link to="/category">Categories</Link>
         <Link to="/history">History</Link>
       </nav>
 
-      {/* Right: User actions */}
       <div className="header-actions">
         {email ? (
           <div className="profile-container">

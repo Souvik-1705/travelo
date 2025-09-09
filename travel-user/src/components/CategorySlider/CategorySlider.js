@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./CategorySlider.css";
 
-// Map category names to image URLs
+
 const categoryImages = {
   Villa: "https://plus.unsplash.com/premium_photo-1682377521697-bc598b52b08a?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHZpbGxhfGVufDB8fDB8fHww?auto=format&fit=crop&w=400&q=60",
   Houseboat: "https://plus.unsplash.com/premium_photo-1697729600773-5b039ef17f3b?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG91c2Vib2F0fGVufDB8fDB8fHww?auto=format&fit=crop&w=400&q=60",

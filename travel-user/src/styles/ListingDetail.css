@@ -19,13 +19,16 @@
 .listing-title {
   font-size: 2rem;
   font-weight: 700;
+  margin-top: 3rem;
   margin-bottom: 0.5rem;
   color: #222;
+  text-align: center;
 }
 
 /* Category and Price */
 .listing-category-price {
   display: flex;
+  justify-content: center;
   gap: 1rem;
   margin-bottom: 1rem;
   flex-wrap: wrap;
@@ -37,6 +40,7 @@
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
   font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .listing-price {
@@ -47,27 +51,17 @@
 
 /* Image gallery */
 .listing-images {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem;
-  overflow-x: auto;
   margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.listing-images::-webkit-scrollbar {
-  height: 6px;
-}
-
-.listing-images::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 3px;
 }
 
 .listing-image {
   border-radius: 10px;
+  width: 100%;
   height: 200px;
   object-fit: cover;
-  min-width: 300px;
   transition: transform 0.3s ease;
 }
 
@@ -75,19 +69,21 @@
   transform: scale(1.05);
 }
 
-/* Listing Info */
 .listing-info {
   margin-bottom: 2rem;
   line-height: 1.6;
   color: #444;
+  font-size: 1rem;
 }
 
 .listing-info p strong {
   color: #222;
 }
 
-/* Book Button */
+
 .book-button {
+  display: block;
+  margin: auto;
   background-color: #007bff;
   color: #fff;
   font-weight: 600;
@@ -96,6 +92,7 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-size: 1rem;
 }
 
 .book-button:hover {
@@ -103,18 +100,57 @@
   transform: scale(1.05);
 }
 
-/* Responsive */
+
+@media (max-width: 992px) {
+  .listing-detail-container {
+    padding: 1.5rem 2rem;
+  }
+
+  .listing-title {
+    font-size: 1.8rem;
+  }
+
+  .listing-price {
+    font-size: 1.1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .listing-detail-container {
     padding: 1rem 1.5rem;
   }
 
+  .listing-title {
+    font-size: 1.6rem;
+  }
+
   .listing-images {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
   .listing-image {
-    min-width: 100%;
     height: 180px;
+  }
+
+  .listing-info {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .listing-title {
+    font-size: 1.4rem;
+  }
+
+  .listing-category-price {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .book-button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
   }
 }

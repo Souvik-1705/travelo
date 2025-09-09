@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { signupUser } from "../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import "../styles/Signup.css";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -19,14 +20,30 @@ function Signup() {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>📝 Sign Up</h2>
-      <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off"/>
-      <input placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} type="password" autoComplete="new-password"/>
-      <button onClick={handleSignup}>Create Account</button>
+    <div className="signup-container">
+      <div className="signup-card">
+        <h2 className="signup-title">📝 Sign Up</h2>
+        <input
+          className="signup-input"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="off"
+        />
+        <input
+          className="signup-input"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          autoComplete="new-password"
+        />
+        <button className="signup-button" onClick={handleSignup}>
+          Create Account
+        </button>
+      </div>
     </div>
   );
 }
 
 export default Signup;
-

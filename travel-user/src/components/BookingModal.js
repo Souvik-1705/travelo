@@ -64,7 +64,6 @@ function BookingModal({ listing, onClose }) {
   <h2 className="modal-title">Book {listing.placeName}</h2>
 
   <div className="modal-content">
-    {/* ALL form fields here */}
     <div className="form-group">
       <label>Name</label>
       <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your full name" />

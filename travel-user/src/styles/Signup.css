@@ -1,15 +1,16 @@
 
-.login-container {
+.signup-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   padding: 1rem;
 }
 
-.login-card {
+
+.signup-card {
   background: white;
   padding: 2.5rem;
   border-radius: 15px;
@@ -21,7 +22,7 @@
 }
 
 
-.login-title {
+.signup-title {
   margin-bottom: 1.5rem;
   color: #333;
   font-size: 1.8rem;
@@ -29,7 +30,7 @@
 }
 
 
-.login-input {
+.signup-input {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
@@ -40,17 +41,17 @@
   transition: all 0.2s ease;
 }
 
-.login-input:focus {
-  border-color: #2575fc;
-  box-shadow: 0 0 6px rgba(37, 117, 252, 0.3);
+.signup-input:focus {
+  border-color: #ff758c;
+  box-shadow: 0 0 6px rgba(255, 117, 140, 0.3);
 }
 
 
-.login-button {
+.signup-button {
   width: 100%;
   padding: 12px;
   margin-top: 1rem;
-  background: #2575fc;
+  background: #ff758c;
   color: white;
   font-size: 1.1rem;
   border: none;
@@ -59,8 +60,8 @@
   transition: 0.3s ease;
 }
 
-.login-button:hover {
-  background: #1a5edb;
+.signup-button:hover {
+  background: #e94e77;
   transform: translateY(-2px);
 }
 
@@ -72,21 +73,21 @@
 
 
 @media (max-width: 480px) {
-  .login-card {
+  .signup-card {
     padding: 1.5rem;
     width: 100%;
   }
 
-  .login-title {
+  .signup-title {
     font-size: 1.5rem;
   }
 
-  .login-input {
+  .signup-input {
     padding: 10px;
     font-size: 0.95rem;
   }
 
-  .login-button {
+  .signup-button {
     font-size: 1rem;
     padding: 10px;
   }

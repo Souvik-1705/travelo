@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBookings, cancelBooking } from "../redux/slices/bookingSlice"; // <-- add cancelBooking
+import { fetchBookings, cancelBooking } from "../redux/slices/bookingSlice"; 
 import { fetchListings } from "../redux/slices/listingSlice";
 import "../styles/OrderHistory.css";
 
@@ -25,7 +25,7 @@ function OrderHistory() {
 
   const handleCancel = (id) => {
     if (window.confirm("Are you sure you want to cancel this booking?")) {
-      dispatch(cancelBooking(id)); // <-- dispatch cancel
+      dispatch(cancelBooking(id)); 
     }
   };
 
@@ -58,7 +58,6 @@ function OrderHistory() {
                   <p>💰 ₹{b.totalPrice}</p>
                   <p>Status: <span className={`status ${b.status}`}>{b.status}</span></p>
 
-                  {/* Cancel button only if booking is still pending */}
                   {b.status === "pending" && (
                     <button
                       className="cancel-btn"

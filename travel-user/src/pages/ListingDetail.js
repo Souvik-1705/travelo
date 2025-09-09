@@ -36,7 +36,6 @@ function ListingDetail() {
         <span className="listing-price">₹{listing.pricePerNight} / night</span>
       </div>
 
-      {/* Image Gallery */}
       <div className="listing-images">
         {listing.images?.map((img, index) => (
           <img
@@ -48,14 +47,12 @@ function ListingDetail() {
         ))}
       </div>
 
-      {/* Listing Details */}
       <div className="listing-info">
         <p><strong>Address:</strong> {listing.address}, {listing.city} - {listing.pin}</p>
         <p><strong>Description:</strong> {listing.description}</p>
         <p><strong>Availability:</strong> {listing.availability ? "Available" : "Not available"}</p>
       </div>
 
-      {/* Book Button */}
       {listing.availability && (
         <button className="book-button" onClick={() => setShowModal(true)}>
           Book Now

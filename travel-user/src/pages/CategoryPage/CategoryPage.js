@@ -20,7 +20,7 @@ function CategoryPage() {
     if (listings.length === 0) dispatch(fetchListings());
   }, [dispatch, categories.length, listings.length]);
 
-  // ✅ Receives results + active flag from SearchBar
+  
   const handleSearch = (results, isActive) => {
     setFilteredListings(results);
     setSearchActive(isActive);

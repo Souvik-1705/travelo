@@ -1,19 +1,21 @@
 .hero-section {
   position: relative;
   height: 60vh;
-  background: url('https://source.unsplash.com/1600x900/?villa,travel') center/cover no-repeat;
+  background: url("https://source.unsplash.com/1600x900/?villa,travel") center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
 }
 
 .hero-overlay {
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
   text-align: center;
   padding: 2rem;
   border-radius: 12px;
   margin-top: 120px;
+  max-width: 90%;
 }
 
 .hero-overlay h1 {
@@ -40,4 +42,55 @@
 
 .hero-cta:hover {
   background-color: #ff5722;
+}
+
+
+@media (max-width: 1024px) {
+  .hero-overlay h1 {
+    font-size: 2.5rem;
+  }
+  .hero-overlay p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 50vh;
+  }
+  .hero-overlay {
+    margin-top: 80px;
+    padding: 1.5rem;
+  }
+  .hero-overlay h1 {
+    font-size: 2rem;
+  }
+  .hero-overlay p {
+    font-size: 1rem;
+  }
+  .hero-cta {
+    font-size: 1rem;
+    padding: 0.7rem 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    height: 45vh;
+    padding: 0.5rem;
+  }
+  .hero-overlay {
+    margin-top: 60px;
+    padding: 1rem;
+  }
+  .hero-overlay h1 {
+    font-size: 1.6rem;
+  }
+  .hero-overlay p {
+    font-size: 0.9rem;
+  }
+  .hero-cta {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
 }
