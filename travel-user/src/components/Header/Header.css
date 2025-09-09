@@ -164,8 +164,12 @@
 }
 
 @media (max-width: 768px) {
+  .logo-text{
+    font-size: 1.2rem;
+    flex: 1;
+  }
   .nav-links {
-    position: absolute;
+    position: fixed;
     top: 60px;
     left: 0;
     right: 0;
@@ -175,6 +179,7 @@
     gap: 1rem;
     display: none;
     z-index: 1400;
+    
   }
 
   .nav-links.active {
@@ -198,5 +203,19 @@
     height: 3px;
     background: #e63946;
     border-radius: 2px;
+  }
+}
+@media (max-width: 480px) {
+  .header {
+    padding: 0.6rem 1rem;  
+  }
+
+  .logo-text {
+    font-size: 1.2rem;   
+    flex: 1;             
+  }
+
+  .hamburger {
+    margin-left: auto;   
   }
 }
