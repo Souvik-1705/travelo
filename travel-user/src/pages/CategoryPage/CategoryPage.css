@@ -1,0 +1,97 @@
+/* Container styles */
+.category-page {
+  padding: 2rem 4rem;
+  background-color: #f9f9f9;
+  min-height: 80vh;
+}
+
+/* Page title */
+.category-page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #222;
+  text-align: center;
+}
+
+/* Subtitle text */
+.category-page-subtitle {
+  font-size: 1.1rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Loading text */
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #007bff;
+}
+
+/* Grid for categories inside slider */
+.category-slider {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+/* Each category item */
+.category-item {
+  background-color: #fff;
+  padding: 1.2rem;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.category-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+.listings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.listing-card {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: #fff;
+}
+
+.listing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.listing-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0.8rem;
+}
+
+.price {
+  font-weight: bold;
+  color: #ff5a5f;
+}
+.listing-link{
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}

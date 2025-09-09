@@ -1,0 +1,43 @@
+.hero-section {
+  position: relative;
+  height: 60vh;
+  background: url('https://source.unsplash.com/1600x900/?villa,travel') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-top: 120px;
+}
+
+.hero-overlay h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.hero-cta {
+  margin-top: 1rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff7a59;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.hero-cta:hover {
+  background-color: #ff5722;
+}

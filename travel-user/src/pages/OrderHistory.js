@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBookings } from "../redux/slices/bookingSlice";
+import { fetchBookings, cancelBooking } from "../redux/slices/bookingSlice"; // <-- add cancelBooking
 import { fetchListings } from "../redux/slices/listingSlice";
+import "../styles/OrderHistory.css";
 
 function OrderHistory() {
   const dispatch = useDispatch();
   const { bookings, loading } = useSelector((state) => state.booking);
   const { listings } = useSelector((state) => state.listing);
-  const { email } = useSelector((state) => state.auth); // get current user's email
+  const { email } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(fetchBookings());
@@ -16,48 +17,61 @@ function OrderHistory() {
     }
   }, [dispatch, listings.length]);
 
-  if (!email) return <p style={{ padding: "1rem" }}>Please log in to view your bookings.</p>;
+  if (!email) return <p className="history-msg">⚠️ Please log in to view your bookings.</p>;
 
   const userBookings = bookings.filter((b) => b.userId === email);
 
   const getListing = (id) => listings.find((l) => l.id === id);
 
+  const handleCancel = (id) => {
+    if (window.confirm("Are you sure you want to cancel this booking?")) {
+      dispatch(cancelBooking(id)); // <-- dispatch cancel
+    }
+  };
+
   return (
-    <div style={{ padding: "1rem" }}>
-      <h2>🧾 Your Booking History</h2>
+    <div className="history-container">
+      <h2 className="history-title">🧾 Your Booking History</h2>
+
       {loading ? (
-        <p>Loading bookings...</p>
+        <p className="history-msg">Loading bookings...</p>
       ) : userBookings.length === 0 ? (
-        <p>No bookings found.</p>
+        <p className="history-msg">No bookings found.</p>
       ) : (
-        userBookings.map((b) => {
-          const listing = getListing(b.listingId);
-          return (
-            <div
-              key={b.id}
-              style={{
-                border: "1px solid #ccc",
-                margin: "1rem 0",
-                padding: "1rem",
-                borderRadius: "8px",
-              }}
-            >
-              <h4>{listing?.placeName || "Listing Deleted"}</h4>
-              {listing?.images?.[0] && (
-                <img
-                  src={listing.images[0]}
-                  alt="Listing"
-                  style={{ width: "200px", borderRadius: "6px" }}
-                />
-              )}
-              <p>📆 {b.fromDate} → {b.toDate} ({b.days} days)</p>
-              <p>👥 {b.guests} guests</p>
-              <p>📍 {b.address}</p>
-              <p>💰 ₹{b.totalPrice}</p>
-              <p>Status: <strong>{b.status}</strong></p>
-            </div>
-          );
-        })
+        <div className="history-grid">
+          {userBookings.map((b) => {
+            const listing = getListing(b.listingId);
+            return (
+              <div key={b.id} className="history-card">
+                {listing?.images?.[0] && (
+                  <img
+                    src={listing.images[0]}
+                    alt="Listing"
+                    className="history-img"
+                  />
+                )}
+                <div className="history-details">
+                  <h3>{listing?.placeName || "Listing Deleted"}</h3>
+                  <p>📆 {b.fromDate} → {b.toDate} ({b.days} days)</p>
+                  <p>👥 {b.guests} guests</p>
+                  <p>📍 {b.address}</p>
+                  <p>💰 ₹{b.totalPrice}</p>
+                  <p>Status: <span className={`status ${b.status}`}>{b.status}</span></p>
+
+                  {/* Cancel button only if booking is still pending */}
+                  {b.status === "pending" && (
+                    <button
+                      className="cancel-btn"
+                      onClick={() => handleCancel(b.id)}
+                    >
+                      ❌ Cancel Booking
+                    </button>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       )}
     </div>
   );

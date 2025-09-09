@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchListings } from "../redux/slices/listingSlice";
 import { fetchCategories } from "../redux/slices/categorySlice";
 import BookingModal from "../components/BookingModal";
+import "../styles/ListingDetail.css";
 
 function ListingDetail() {
   const { id } = useParams();
@@ -14,53 +15,54 @@ function ListingDetail() {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    if (listings.length === 0) {
-      dispatch(fetchListings());
-    }
-    if (categories.length === 0) {
-    dispatch(fetchCategories());
-  }
-  }, [dispatch, listings.length,categories.length]);
+    if (listings.length === 0) dispatch(fetchListings());
+    if (categories.length === 0) dispatch(fetchCategories());
+  }, [dispatch, listings.length, categories.length]);
 
   useEffect(() => {
     const found = listings.find((l) => l.id === id);
     if (found) setListing(found);
   }, [listings, id]);
 
-  if (!listing) return <p style={{ padding: "1rem" }}>Loading listing...</p>;
+  if (!listing) return <p className="loading-text">Loading listing...</p>;
+
   const category = categories.find((c) => c.id === listing.categoryId);
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <h2>{listing.placeName}</h2>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+    <div className="listing-detail-container">
+      <h1 className="listing-title">{listing.placeName}</h1>
+      <div className="listing-category-price">
+        <span className="listing-category">{category?.name}</span>
+        <span className="listing-price">₹{listing.pricePerNight} / night</span>
+      </div>
+
+      {/* Image Gallery */}
+      <div className="listing-images">
         {listing.images?.map((img, index) => (
           <img
             key={index}
             src={img}
             alt={`img-${index}`}
-            style={{ width: "200px", borderRadius: "6px" }}
+            className="listing-image"
           />
         ))}
       </div>
-      <p><strong>Price:</strong> ₹{listing.pricePerNight} / night</p>
-      <p><strong>Address:</strong> {listing.address}, {listing.city} - {listing.pin}</p>
-      <p><strong>Category:</strong> {category?.name}</p>
-      <p><strong>Description:</strong> {listing.description}</p>
-      <p><strong>Availability:</strong> {listing.availability ? "Available" : "Not available"}</p>
 
+      {/* Listing Details */}
+      <div className="listing-info">
+        <p><strong>Address:</strong> {listing.address}, {listing.city} - {listing.pin}</p>
+        <p><strong>Description:</strong> {listing.description}</p>
+        <p><strong>Availability:</strong> {listing.availability ? "Available" : "Not available"}</p>
+      </div>
+
+      {/* Book Button */}
       {listing.availability && (
-        <button style={{ marginTop: "1rem" }} onClick={() => setShowModal(true)}>
+        <button className="book-button" onClick={() => setShowModal(true)}>
           Book Now
         </button>
       )}
 
-      {showModal && (
-        <BookingModal
-          listing={listing}
-          onClose={() => setShowModal(false)}
-        />
-      )}
+      {showModal && <BookingModal listing={listing} onClose={() => setShowModal(false)} />}
     </div>
   );
 }
