@@ -30,11 +30,8 @@ function Listings() {
         ) : (
           <div className="listings-grid">
             {listings.map((l) => (
-              <a
+              <div
                 key={l.id}
-                href={l.googleLink || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="listing-card"
               >
                 {l.images?.length > 0 && (
@@ -76,9 +73,7 @@ function Listings() {
                     </div>
                   </div>
                 </div>
-
-
-              </a>
+              </div>
             ))}
           </div>
         )}

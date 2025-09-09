@@ -30,6 +30,8 @@ export const loginAdmin = createAsyncThunk(
       const data = response.data;
       localStorage.setItem("adminToken", data.idToken);
       localStorage.setItem("adminEmail", data.email);
+      localStorage.setItem("isGuest", "false");
+
 
       return {
         token: data.idToken,
@@ -48,6 +50,7 @@ const authSlice = createSlice({
     email: localStorage.getItem("adminEmail") || null,
     loading: false,
     error: null,
+    isGuest: localStorage.getItem("isGuest") === "true" ? true : false,
   },
   reducers: {
     logoutAdmin(state) {
@@ -55,6 +58,15 @@ const authSlice = createSlice({
       state.email = null;
       localStorage.removeItem("adminToken");
       localStorage.removeItem("adminEmail");
+      localStorage.removeItem("isGuest");
+    },
+    loginAsGuest(state) {
+      state.token = "guest_token"; 
+      state.email = "guest@travelo.com";
+      state.isGuest = true;
+      localStorage.setItem("adminToken", "guest_token");
+      localStorage.setItem("adminEmail", "guest@travelo.com");
+      localStorage.setItem("isGuest", "true");
     },
   },
   extraReducers: (builder) => {
@@ -75,7 +87,9 @@ const authSlice = createSlice({
         state.error = action.payload;
         localStorage.removeItem("adminToken");
         localStorage.removeItem("adminEmail");
+        localStorage.removeItem("isGuest");
       })
+
       .addCase(loginAdmin.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -92,5 +106,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { logoutAdmin } = authSlice.actions;
+export const { logoutAdmin,loginAsGuest } = authSlice.actions;
 export default authSlice.reducer;

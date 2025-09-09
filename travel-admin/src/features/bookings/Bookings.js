@@ -32,13 +32,6 @@ function Bookings() {
     return found ? found.placeName : "Unknown";
   };
 
-  const getStatusClass = (status) => {
-    if (status === "pending") return "status-pending";
-    if (status === "completed") return "status-completed";
-    if (status === "Rejected") return "status-rejected";
-    return "";
-  };
-
   return (
     <>
       <AdminNavbar />
@@ -49,27 +42,47 @@ function Bookings() {
         ) : bookings.length === 0 ? (
           <p>No bookings found.</p>
         ) : (
-          <div className="bookings-grid">
-            {bookings.map((b) => (
-              <div key={b.id} className="booking-card">
-                <p><strong>User:</strong> {b.userName}</p>
-                <p><strong>Place:</strong> {getPlaceName(b.listingId)}</p>
-                <p><strong>From:</strong> {b.fromDate} <strong>To:</strong> {b.toDate}</p>
-                <p><strong>Days:</strong> {b.days} <strong>Total:</strong> ₹{b.totalPrice}</p>
-                <p className={`booking-status ${getStatusClass(b.status)}`}>
-                  {b.status === "pending" ? "🟡 Pending" : b.status === "completed" ? "✅ Completed" : "❌ Rejected"}
-                </p>
-                <div className="booking-actions">
-                  {b.status === "pending" && (
-                    <>
-                      <button onClick={() => handleApprove(b.id)} className="approve-btn">Approve</button>
-                      <button onClick={() => handleReject(b.id)} className="reject-btn">Reject</button>
-                    </>
-                  )}
-                  <button onClick={() => handleDelete(b.id)} className="delete-btn">Delete</button>
-                </div>
-              </div>
-            ))}
+          <div className="table-wrapper">
+            <table className="bookings-table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Place</th>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>Days</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {bookings.map((b) => (
+                  <tr key={b.id}>
+                    <td data-label="User">{b.userName}</td>
+                    <td data-label="Place">{getPlaceName(b.listingId)}</td>
+                    <td data-label="From">{b.fromDate}</td>
+                    <td data-label="To">{b.toDate}</td>
+                    <td data-label="Days">{b.days}</td>
+                    <td data-label="Total">₹{b.totalPrice}</td>
+                    <td data-label="Status">
+                      <span className={`status-badge ${b.status.toLowerCase()}`}>
+                        {b.status}
+                      </span>
+                    </td>
+                    <td data-label="Actions">
+                      {b.status === "pending" && (
+                        <>
+                          <button onClick={() => handleApprove(b.id)} className="btn approve">Approve</button>
+                          <button onClick={() => handleReject(b.id)} className="btn reject">Reject</button>
+                        </>
+                      )}
+                      <button onClick={() => handleDelete(b.id)} className="btn delete">Delete</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
       </div>

@@ -1,16 +1,26 @@
 .admin-navbar {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
+  box-sizing: border-box;
   justify-content: space-between;
   align-items: center;
   background: #1e293b;
-  padding: 0.8rem 2rem;
+  padding: 0.8rem 1.5rem;
   color: white;
+  font-family: 'Poppins', sans-serif;
+  z-index: 1000;
 }
 
 .admin-navbar-left h2 {
   margin: 0;
   font-size: 1.4rem;
+  font-weight: 600;
+  color: white;
 }
+
 
 .admin-navbar-center {
   display: flex;
@@ -25,8 +35,9 @@
 }
 
 .admin-navbar-center a:hover {
-  color: #38bdf8; 
+  color: #38bdf8;
 }
+
 
 .admin-navbar-right {
   display: flex;
@@ -46,4 +57,140 @@
 
 .admin-navbar-right button:hover {
   background: #dc2626;
+}
+
+
+.notification-wrapper {
+  position: relative;
+  margin-right: 10px;
+}
+
+.notification-bell {
+  position: relative;
+  cursor: pointer;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 28px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: 10px;
+  min-width: 220px;
+  z-index: 10;
+}
+
+.notif-item {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.notif-item:hover {
+  background: #f5f5f5;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.notif-empty {
+  font-size: 14px;
+  color: #777;
+  text-align: center;
+}
+
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+  color: white;
+  z-index: 1000;
+}
+
+
+@media (max-width: 768px) {
+  .admin-navbar-left h2{
+    font-size: 1rem;
+    flex: 1;
+  }
+  .hamburger {
+    display:flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 10px;
+  }
+
+  .admin-navbar-center {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: #1e293b;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    display: none;
+  }
+
+  .admin-navbar-center.active {
+    display: flex;
+  }
+
+  .admin-navbar-right {
+    gap: 0.6rem;
+  }
+
+  .admin-email {
+    display: none; 
+  }
+}
+@media (max-width: 480px) {
+  .admin-navbar-left h2{
+    font-size: 0.8rem;
+    flex: 1;
+  }
+  .hamburger {
+    display:flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .admin-navbar-center {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: #1e293b;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    display: none;
+  }
+
+  .admin-navbar-center.active {
+    display: flex;
+  }
+
+  .admin-navbar-right {
+    gap: 0.6rem;
+  }
+
+  .admin-email {
+    display: none; 
+  }
 }

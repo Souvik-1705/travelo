@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAdmin } from "../redux/slices/authSlice";
+import { loginAdmin, loginAsGuest } from "../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import "../styles/Login.css";
 
@@ -17,6 +17,11 @@ function Login() {
     if (result.meta.requestStatus === "fulfilled") {
       navigate("/admin/dashboard");
     }
+  };
+
+  const handleGuestLogin = () => {
+    dispatch(loginAsGuest());
+    navigate("/admin/dashboard");
   };
 
   return (
@@ -36,6 +41,19 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         /><br /><br />
         <button type="submit" disabled={loading}>Login</button>
+        <hr />
+      <button onClick={handleGuestLogin}
+        style={{
+          marginTop: "10px",
+          padding: "10px 15px",
+          backgroundColor: "#2563eb",
+          color: "#fff",
+          border: "none",
+          borderRadius: "6px",
+          cursor: "pointer",
+        }}>
+        Continue as Guest
+      </button>
       </form>
       {error && <p style={{ color: "red" }}>{error}</p>}
     </div>

@@ -16,11 +16,14 @@ const Bookings = lazy(() => import("./features/bookings/Bookings"));
 
 function App() {
   const dispatch=useDispatch();
-  const token=localStorage.getItem("token");
+  const token=localStorage.getItem("adminToken");
 
   useEffect(()=>{
     if(token){
-      dispatch(verifyToken());
+      dispatch(verifyToken(token)).unwrap()
+      .catch(() => {
+        dispatch(logoutAdmin());
+      });
     }
     else{
       dispatch(logoutAdmin());

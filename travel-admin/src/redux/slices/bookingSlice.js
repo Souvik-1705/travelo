@@ -35,6 +35,13 @@ const bookingSlice = createSlice({
     bookings: [],
     loading: false,
     error: null,
+    unreadCount:0,
+  },
+
+  reducers: {
+    markAllRead: (state) => {
+      state.unreadCount = 0;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -44,15 +51,19 @@ const bookingSlice = createSlice({
       .addCase(fetchBookings.fulfilled, (state, action) => {
         state.loading = false;
         state.bookings = action.payload;
+        state.unreadCount = action.payload.filter((b) => b.status === "pending").length;
       })
       .addCase(updateBookingStatus.fulfilled, (state, action) => {
         const booking = state.bookings.find((b) => b.id === action.payload.id);
         if (booking) booking.status = action.payload.status;
+        state.unreadCount = state.bookings.filter((b) => b.status === "pending").length;
       })
       .addCase(deleteBooking.fulfilled, (state, action) => {
         state.bookings = state.bookings.filter((b) => b.id !== action.payload);
+        state.unreadCount = state.bookings.filter((b) => b.status === "pending").length;
       });
   },
 });
 
+export const { markAllRead } = bookingSlice.actions;
 export default bookingSlice.reducer;

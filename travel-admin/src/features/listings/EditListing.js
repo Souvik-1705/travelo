@@ -13,6 +13,7 @@ function EditListing() {
   const { listings } = useSelector((state) => state.listing);
   const { categories } = useSelector((state) => state.category);
   const [formData, setFormData] = useState(null);
+  const [newImageUrl, setNewImageUrl] = useState("");
 
   useEffect(() => {
     dispatch(fetchListings());
@@ -42,6 +43,23 @@ function EditListing() {
     navigate("/admin/listings");
   };
 
+
+  const handleRemoveImage = (index) => {
+    setFormData((prev) => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleAddImageByLink = () => {
+  if (newImageUrl.trim() !== "") {
+    setFormData((prev) => ({
+      ...prev,
+      images: [...(prev.images || []), newImageUrl],
+    }));
+    setNewImageUrl("");
+  }
+};
   return (
     <>
       <AdminNavbar />
@@ -84,14 +102,6 @@ function EditListing() {
           placeholder="Description"
         /><br />
 
-        {/* ✅ New Google Link field */}
-        <input
-          name="googleLink"
-          value={formData.googleLink || ""}
-          onChange={handleChange}
-          placeholder="Google Maps/Details Link"
-        /><br />
-
         <select
           name="categoryId"
           value={formData.categoryId}
@@ -115,6 +125,34 @@ function EditListing() {
           />
         </label>
         <br />
+            <div className="image-section">
+          <h4>Images</h4>
+          <div className="image-preview-container">
+            {formData.images?.map((img, index) => (
+              <div key={index} className="image-preview">
+                <img src={img} alt={`Preview ${index}`} />
+                <button
+                  type="button"
+                  onClick={() => handleRemoveImage(index)}
+                  className="remove-btn"
+                >
+                  ❌
+                </button>
+              </div>
+            ))}
+          </div>
+          <div className="add-by-link">
+            <input
+              type="text"
+              placeholder="Paste image URL"
+              value={newImageUrl}
+              onChange={(e) => setNewImageUrl(e.target.value)}
+            />
+            <button type="button" onClick={handleAddImageByLink}>
+              Add Image
+            </button>
+          </div>
+        </div>
 
         <button type="submit">Update Listing</button>
       </form>
