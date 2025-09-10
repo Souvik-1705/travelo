@@ -6,7 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 import { useDispatch } from "react-redux";
 import { logout, verifyToken } from "./redux/slices/authSlice";
-import Chatbot from "./components/Chatbot/Chatbot";
+import ChatbotBox from "./components/ChatbotBox/ChatbotBox";
 
 
 
@@ -47,7 +47,7 @@ function App() {
           </Routes>
         </Suspense>
       </main>
-      <Chatbot/>
+      <ChatbotBox/>
     </Router>
     </div>
   );
