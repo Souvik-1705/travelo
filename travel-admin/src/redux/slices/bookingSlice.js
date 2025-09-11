@@ -3,7 +3,7 @@ import axios from "axios";
 
 const DB_URL = "https://travel-website-2ae60-default-rtdb.firebaseio.com/bookings";
 
-// Fetch all bookings
+
 export const fetchBookings = createAsyncThunk("bookings/fetch", async () => {
   const res = await axios.get(`${DB_URL}.json`);
   const data = res.data;
@@ -11,7 +11,6 @@ export const fetchBookings = createAsyncThunk("bookings/fetch", async () => {
   return Object.keys(data).map((id) => ({ id, ...data[id] }));
 });
 
-// Update booking status
 export const updateBookingStatus = createAsyncThunk(
   "bookings/update",
   async ({ id, status }) => {
@@ -20,7 +19,6 @@ export const updateBookingStatus = createAsyncThunk(
   }
 );
 
-// ✅ Delete booking
 export const deleteBooking = createAsyncThunk(
   "bookings/delete",
   async (id) => {

@@ -1,5 +1,5 @@
 
-.categories-container {
+.cities-container {
   max-width: 800px;
   margin: 40px auto;
   padding: 20px;
@@ -9,14 +9,15 @@
 }
 
 
-.categories-title {
+.cities-title {
   text-align: center;
   margin-bottom: 20px;
   font-size: 28px;
   color: #333;
 }
 
-.category-form {
+
+.city-form {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -24,7 +25,7 @@
   justify-content: center;
 }
 
-.category-form input {
+.city-input {
   flex: 1;
   min-width: 200px;
   padding: 10px;
@@ -33,7 +34,7 @@
   font-size: 16px;
 }
 
-.category-form button {
+.city-submit-btn {
   padding: 10px 20px;
   background-color: #4CAF50;
   color: #fff;
@@ -43,7 +44,7 @@
   font-size: 16px;
 }
 
-.category-form button:hover {
+.city-submit-btn:hover {
   background-color: #45a049;
 }
 
@@ -55,65 +56,61 @@
 }
 
 
-.no-categories {
+.no-cities {
   text-align: center;
   color: #999;
   font-style: italic;
 }
 
-.category-list {
+
+.city-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.category-row {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+
+.city-row {
+  display: flex;             
+  align-items: center;      
+  gap: 15px;                 
   padding: 10px 15px;
   border-bottom: 1px solid #ddd;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background 0.2s;
 }
 
-.category-row:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+.city-row:hover {
+  background-color: #f0f0f0;
 }
 
 
-.category-thumb {
-  width: 60px;
-  height: 60px;
+.city-thumb {
+  width: 50px;
+  height: 50px;
   object-fit: cover;
   border-radius: 6px;
   border: 1px solid #ccc;
-  margin-right: 12px;
 }
 
-.category-name {
+
+.city-name {
   font-size: 18px;
   font-weight: 500;
   color: #333;
-  flex: 1; 
 }
 
-.category-actions {
+
+.city-actions {
+  margin-left: auto;       
   display: flex;
   gap: 10px;
-  margin-left: auto;
 }
 
-.edit-btn,
-.delete-btn {
+.btn {
   padding: 6px 12px;
   border: none;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: 500;
   font-size: 14px;
 }
 
@@ -134,47 +131,17 @@
 .delete-btn:hover {
   background-color: #da190b;
 }
-
-
-@media (max-width: 768px) {
-  .category-form {
-    flex-direction: column;
-  }
-
-  .category-form button {
-    width: 100%;
-  }
-
-  .category-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .category-actions {
-    width: 100%;
-    justify-content: flex-end;
-  }
+.city-actions .manage-btn {
+  background-color: #8e44ad;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: background-color 0.3s ease;
 }
 
-@media (max-width: 480px) {
-  .category-form input {
-    font-size: 0.9rem;
-    padding: 8px;
-  }
-
-  .category-form button {
-    font-size: 0.9rem;
-    padding: 8px;
-  }
-
-  .edit-btn,
-  .delete-btn {
-    padding: 5px 10px;
-    font-size: 0.8rem;
-  }
-
-  .category-name {
-    font-size: 0.9rem;
-  }
+.city-actions .manage-btn:hover {
+  background-color: #732d91;
 }

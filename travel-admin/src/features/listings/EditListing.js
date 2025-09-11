@@ -4,6 +4,7 @@ import { fetchListings, updateListing } from "../../redux/slices/listingSlice";
 import { fetchCategories } from "../../redux/slices/categorySlice";
 import { useParams, useNavigate } from "react-router-dom";
 import AdminNavbar from "../../components/AdminNavbar";
+import { fetchCities } from "../../redux/slices/citySlice";
 import "../../styles/EditListing.css";
 
 function EditListing() {
@@ -14,11 +15,16 @@ function EditListing() {
   const { categories } = useSelector((state) => state.category);
   const [formData, setFormData] = useState(null);
   const [newImageUrl, setNewImageUrl] = useState("");
+  const {cities}=useSelector((state)=>state.city);
 
   useEffect(() => {
     dispatch(fetchListings());
     dispatch(fetchCategories());
   }, [dispatch]);
+
+  useEffect(() => {
+  dispatch(fetchCities());
+}, [dispatch]);
 
   useEffect(() => {
     if (listings.length > 0) {
@@ -77,12 +83,14 @@ function EditListing() {
           onChange={handleChange}
           placeholder="Price Per Night"
         /><br />
-        <input
-          name="city"
-          value={formData.city}
-          onChange={handleChange}
-          placeholder="City"
-        /><br />
+        <select name="city" value={formData.city} onChange={handleChange}>
+          <option value="">Select City</option>
+          {cities.map((c) => (
+            <option key={c.id} value={c.name}>
+              {c.name}
+            </option>
+          ))}
+        </select><br />
         <input
           name="pin"
           value={formData.pin}
@@ -101,7 +109,6 @@ function EditListing() {
           onChange={handleChange}
           placeholder="Description"
         /><br />
-
         <select
           name="categoryId"
           value={formData.categoryId}

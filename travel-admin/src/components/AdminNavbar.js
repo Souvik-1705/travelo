@@ -50,6 +50,7 @@ function AdminNavbar() {
       <div className={`admin-navbar-center ${menuOpen ? "active" : ""}`}>
         <Link to="/admin/dashboard" onClick={() => setMenuOpen(false)}>Dashboard</Link>
         <Link to="/admin/categories" onClick={() => setMenuOpen(false)}>Categories</Link>
+        <Link to="/admin/cities" onClick={()=>setMenuOpen(false)}>Cities</Link>
         <Link to="/admin/listings" onClick={() => setMenuOpen(false)}>Listings</Link>
         <Link to="/admin/add-listing" onClick={() => setMenuOpen(false)}>Add Listing</Link>
         <Link to="/admin/bookings" onClick={() => setMenuOpen(false)}>Bookings</Link>

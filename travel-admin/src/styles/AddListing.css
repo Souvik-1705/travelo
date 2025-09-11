@@ -1,4 +1,4 @@
-/* General form styling */
+
 .listing-form {
   max-width: 700px;
   margin: 40px auto;
@@ -17,7 +17,7 @@
   color: #333;
 }
 
-/* Inputs & textarea */
+
 .listing-form input,
 .listing-form textarea,
 .listing-form select {
@@ -38,7 +38,6 @@
   box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
 }
 
-/* Image section */
 .image-section {
   margin-top: 20px;
 }
@@ -88,7 +87,6 @@
   background: #d9363e;
 }
 
-/* Add by link section */
 .add-by-link {
   display: flex;
   gap: 10px;
@@ -113,7 +111,6 @@
   background: #0056b3;
 }
 
-/* Submit button */
 .listing-form button[type="submit"] {
   width: 100%;
   margin-top: 20px;

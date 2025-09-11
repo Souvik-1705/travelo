@@ -10,14 +10,14 @@ export const fetchCategories = createAsyncThunk("categories/fetch", async () => 
   return Object.keys(data).map((id) => ({ id, ...data[id] }));
 });
 
-export const addCategory = createAsyncThunk("categories/add", async (name) => {
-  const res = await axios.post(`${DB_URL}.json`, { name });
-  return { id: res.data.name, name };
+export const addCategory = createAsyncThunk("categories/add", async ({name,image}) => {
+  const res = await axios.post(`${DB_URL}.json`, { name,image});
+  return { id: res.data.name, name,image };
 });
 
-export const updateCategory = createAsyncThunk("categories/update", async ({ id, name }) => {
-  await axios.patch(`${DB_URL}/${id}.json`, { name });
-  return { id, name };
+export const updateCategory = createAsyncThunk("categories/update", async ({ id,name,image }) => {
+  await axios.patch(`${DB_URL}/${id}.json`, { name,image });
+  return { id,name,image };
 });
 
 export const deleteCategory = createAsyncThunk("categories/delete", async (id) => {

@@ -1,4 +1,4 @@
-// Dashboard.js
+
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AdminNavbar from "../components/AdminNavbar";
@@ -7,7 +7,7 @@ import { fetchBookings } from "../redux/slices/bookingSlice";
 import { fetchCategories } from "../redux/slices/categorySlice";
 import "../styles/Dashboard.css";
 
-// Recharts imports
+
 import {
   LineChart,
   Line,
@@ -34,7 +34,7 @@ function Dashboard() {
 
   const totalRevenue = bookings.reduce((sum, b) => sum + b.totalPrice, 0);
 
-  // Prepare monthly data for charts
+  
   const monthlyData = Array.from({ length: 12 }, (_, i) => {
     const monthBookings = bookings.filter(
       (b) => new Date(b.fromDate).getMonth() === i

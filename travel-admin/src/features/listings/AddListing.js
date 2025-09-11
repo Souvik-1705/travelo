@@ -4,11 +4,12 @@ import { addListing } from "../../redux/slices/listingSlice";
 import { fetchCategories } from "../../redux/slices/categorySlice";
 import AdminNavbar from "../../components/AdminNavbar";
 import "../../styles/AddListing.css";
+import { fetchCities } from "../../redux/slices/citySlice";
 
 function AddListing() {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
-  const [images, setImages] = useState([]);
+  const {cities}=useSelector((state)=>state.city);
   const [formData, setFormData] = useState({
     placeName: "",
     pricePerNight: "",
@@ -25,6 +26,12 @@ function AddListing() {
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
+
+  useEffect(() => {
+  if (!cities.length) {
+    dispatch(fetchCities());
+  }
+}, [dispatch, cities.length]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -56,7 +63,6 @@ function AddListing() {
     e.preventDefault();
     const payload = {
       ...formData,
-      images,
       availability: true,
       createdAt: new Date().toISOString(),
     };
@@ -72,7 +78,7 @@ function AddListing() {
       categoryId: "",
       images:[],
     });
-    setImages([]);
+    setNewImageUrl("");
   };
 
   return (
@@ -82,7 +88,10 @@ function AddListing() {
       <h3>Add New Listing</h3>
       <input name="placeName" placeholder="Place Name" onChange={handleChange} value={formData.placeName} /><br />
       <input name="pricePerNight" placeholder="Price" onChange={handleChange} value={formData.pricePerNight} /><br />
-      <input name="city" placeholder="City" onChange={handleChange} value={formData.city} /><br />
+      <select name="city" value={formData.city} onChange={handleChange}>
+          <option value="">Select City</option>
+          {cities.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
+      </select><br />
       <input name="pin" placeholder="PIN Code" onChange={handleChange} value={formData.pin} /><br />
       <input name="address" placeholder="Full Address" onChange={handleChange} value={formData.address} /><br />
       <textarea name="description" placeholder="Description" onChange={handleChange} value={formData.description}></textarea><br />
