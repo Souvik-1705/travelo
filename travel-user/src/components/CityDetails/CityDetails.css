@@ -1,0 +1,198 @@
+
+* {
+  box-sizing: border-box;
+}
+
+
+.city-details { 
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 120px 1rem 2rem 1rem; 
+}
+
+
+.back-btn {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.back-btn:hover {
+  background-color: #115293;
+}
+
+
+.city-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.city-banner {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+
+.city-title {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+.city-description {
+  font-size: 1.2rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+
+.section-title {
+  font-size: 2rem;
+  margin: 2rem 0 1rem;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.famous-places-blog {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+
+.place-blog-card {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.place-blog-img {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.place-blog-content {
+  flex: 1;
+}
+
+.place-blog-title {
+  font-size: 1.5rem;
+  color: #34495e;
+  margin-bottom: 0.5rem;
+}
+
+.place-blog-desc {
+  font-size: 1rem;
+  color: #555;
+}
+
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #007bff;
+  margin-top: 2rem;
+}
+
+
+@media (max-width: 1024px) {
+  .city-details {
+    padding: 100px 1.5rem 2rem 1.5rem;
+  }
+
+  .city-title {
+    font-size: 2rem;
+  }
+
+  .city-description {
+    font-size: 1.1rem;
+  }
+
+  .place-blog-card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .place-blog-img {
+    width: 100%;
+    height: 200px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .city-details {
+    padding: 80px 1rem 2rem 1rem;
+  }
+
+  .city-title {
+    font-size: 1.8rem;
+  }
+
+  .city-description {
+    font-size: 1rem;
+  }
+
+  .place-blog-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .place-blog-img {
+    width: 100%;
+    height: 180px;
+  }
+
+  .place-blog-title {
+    font-size: 1.3rem;
+  }
+
+  .place-blog-desc {
+    font-size: 0.95rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .city-details {
+    padding: 60px 0.5rem 2rem 0.5rem;
+  }
+
+  .city-title {
+    font-size: 1.5rem;
+  }
+
+  .city-description {
+    font-size: 0.9rem;
+  }
+
+  .place-blog-img {
+    height: 150px;
+  }
+
+  .place-blog-title {
+    font-size: 1.2rem;
+  }
+
+  .place-blog-desc {
+    font-size: 0.85rem;
+  }
+}

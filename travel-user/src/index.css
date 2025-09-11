@@ -12,9 +12,9 @@ body {
 }
 
 #root > * {
-  flex: 1 0 auto; /* allow main content to grow */
+  flex: 1 0 auto; 
 }
 
 main {
-  flex: 1 0 auto; /* main content fills remaining space */
+  flex: 1 0 auto;
 }

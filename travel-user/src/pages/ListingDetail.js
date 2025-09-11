@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListings } from "../redux/slices/listingSlice";
 import { fetchCategories } from "../redux/slices/categorySlice";
@@ -13,6 +13,7 @@ function ListingDetail() {
   const { categories } = useSelector((state) => state.category);
   const [listing, setListing] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const navigate=useNavigate();
 
   useEffect(() => {
     if (listings.length === 0) dispatch(fetchListings());
@@ -30,6 +31,9 @@ function ListingDetail() {
 
   return (
     <div className="listing-detail-container">
+      <button className="back-btn" onClick={() => navigate(-1)}>
+              &larr; Back
+        </button>
       <h1 className="listing-title">{listing.placeName}</h1>
       <div className="listing-category-price">
         <span className="listing-category">{category?.name}</span>

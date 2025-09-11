@@ -11,6 +11,7 @@ function CategoryPage() {
   const dispatch = useDispatch();
   const { categories, loading } = useSelector((state) => state.category);
   const { listings } = useSelector((state) => state.listing);
+  
 
   const [filteredListings, setFilteredListings] = useState([]);
   const [searchActive, setSearchActive] = useState(false);

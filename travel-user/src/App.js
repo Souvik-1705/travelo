@@ -10,8 +10,11 @@ import ChatbotBox from "./components/ChatbotBox/ChatbotBox";
 
 
 
+
 const Home = lazy(() => import("./pages/Home"));
 const CategoryPage= lazy(()=> import("./pages/CategoryPage/CategoryPage"));
+const FamousPlaces=lazy(()=>import("./pages/FamousPlaces/FamousPlaces"));
+const CityDetails=lazy(()=>import ("./components/CityDetails/CityDetails"));
 const CategoryListings = lazy(() => import("./pages/CategoryListings"));
 const ListingDetail = lazy(() => import("./pages/ListingDetail"));
 const OrderHistory = lazy(() => import("./pages/OrderHistory"));
@@ -39,6 +42,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/category" element={<CategoryPage/>}/>
+            <Route path="/famous-places" element={<FamousPlaces />} />
+            <Route path="/famous-places/:cityId" element={<CityDetails />} />
             <Route path="/category/:id" element={<CategoryListings />} />
             <Route path="/listing/:id"element={<ProtectedRoute><ListingDetail /></ProtectedRoute>}/>
             <Route path="/history" element={<ProtectedRoute><OrderHistory /></ProtectedRoute>}/>

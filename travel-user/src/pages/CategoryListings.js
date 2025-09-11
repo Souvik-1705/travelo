@@ -25,6 +25,9 @@ function CategoryListings() {
   return (
     <div className="category-listings-container">
       <h1 className="category-listings-title">Available Listings</h1>
+      <button className="back-btn" onClick={() => navigate(-1)}>
+              &larr; Back
+          </button>
       <p className="category-listings-subtitle">
         Browse all available listings in this category and choose your perfect stay.
       </p>

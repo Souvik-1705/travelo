@@ -59,6 +59,7 @@ function Header() {
       <nav className={`nav-links ${menuOpen ? "active" : ""}`}>
         <Link to="/" onClick={handleNavClick}>Home</Link>
         <Link to="/category" onClick={handleNavClick}>Categories</Link>
+        <Link to="/famous-places" onClick={handleNavClick}>Famous Places</Link>
         <Link to="/history" onClick={handleNavClick}>History</Link>
       </nav>
 
