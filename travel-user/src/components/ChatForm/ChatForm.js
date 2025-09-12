@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
-import { CompanyInfo } from '../CompanyInfo';
+import React, { useRef } from "react";
+import { useSelector } from "react-redux";
 
 const ChatForm = ({ chatHistory, setChatHistory, generateBotResponse }) => {
   const inputRef = useRef();
+  const cities = useSelector((state) => state.city.cities); 
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -10,19 +11,42 @@ const ChatForm = ({ chatHistory, setChatHistory, generateBotResponse }) => {
     if (!userMessage) return;
     inputRef.current.value = "";
 
-    // user message
-    setChatHistory(history => [...history, { role: "user", text: userMessage }]);
+    
+    setChatHistory((history) => [
+      ...history,
+      { role: "user", text: userMessage },
+    ]);
 
     setTimeout(() => {
-      setChatHistory(history => [...history, { role: "model", text: "Thinking..." }]);
-      generateBotResponse([...chatHistory, { role: "user", text: `Here is Travelo company info: ${JSON.stringify(CompanyInfo)}.Now please answer this user query: ${userMessage}` }]);
+      setChatHistory((history) => [
+        ...history,
+        { role: "model", text: "Thinking..." },
+      ]);
+
+      generateBotResponse([
+        ...chatHistory,
+        {
+          role: "user",
+          text: `Here is Travelo company info: ${JSON.stringify(
+            cities
+          )}. Now please answer this user query: ${userMessage}`,
+        },
+      ]);
     }, 600);
   };
 
   return (
     <form className="chat-form" onSubmit={handleFormSubmit}>
-      <input ref={inputRef} type="text" placeholder="Message..." className="message-input" required />
-      <button type="submit" className="material-symbols-rounded">arrow_upward</button>
+      <input
+        ref={inputRef}
+        type="text"
+        placeholder="Message..."
+        className="message-input"
+        required
+      />
+      <button type="submit" className="material-symbols-rounded">
+        arrow_upward
+      </button>
     </form>
   );
 };

@@ -1,16 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from "react-redux";  
 import ChatbotIcon from '../ChatbotIcon/ChatbotIcon';
 import "./ChatbotBox.css";
 import ChatForm from '../ChatForm/ChatForm';
 import ChatMessage from '../ChatMessage/ChatMessage';
-import { CompanyInfo } from '../CompanyInfo';
 
 const ChatbotBox = () => {
   const [chatHistory, setChatHistory] = useState([]);
   const [showChatbot, setShowChatbot] = useState(false);
   const chatBodyRef = useRef();
 
-  const generateBotResponse = async (history) => {
+  
+  const cities = useSelector((state) => state.city.cities);
+  const categories = useSelector((state) => state.category.categories);
+  const listings = useSelector((state) => state.listing.listings);
+  const bookings = useSelector((state) => state.booking.bookings);
+
+  
+  const generateBotResponse = async (history, userQuery) => {
     const updateHistory = (text, isError = false) => {
       setChatHistory(prev => [
         ...prev.filter(msg => msg.text !== "Thinking..."),
@@ -18,23 +25,26 @@ const ChatbotBox = () => {
       ]);
     };
 
-    // Format history for Gemini API
     const formattedHistory = history.map(({ role, text }) => ({
       role,
       parts: [{ text }]
     }));
 
-    // Add CompanyInfo as system instruction
-    const requestBody = {
-      contents: [
-        { role: "user", parts: [{ text: "Company Info: " + JSON.stringify(CompanyInfo) }] },
-        ...formattedHistory
-      ]
-    };
-
     try {
-      console.log("🔑 API URL:", process.env.REACT_APP_API_URL);
-      console.log("📤 Request Body:", requestBody);
+    
+      const allData = {
+        cities,
+        categories,
+        listings,
+        bookings
+      };
+
+      const requestBody = {
+        contents: [
+          { role: "user", parts: [{ text: `User asked: ${userQuery}. Use this company data: ${JSON.stringify(allData)}` }] },
+          ...formattedHistory
+        ]
+      };
 
       const response = await fetch(process.env.REACT_APP_API_URL, {
         method: "POST",
@@ -42,18 +52,12 @@ const ChatbotBox = () => {
         body: JSON.stringify(requestBody),
       });
 
-      console.log("📥 Raw Response:", response);
-
       const data = await response.json();
-      console.log("📥 Parsed Response JSON:", data);
-
       if (!response.ok) throw new Error(data.error?.message || "Something went wrong!");
 
       const apiResponseText = data.candidates[0].content.parts[0].text
-        .replace(/\*\*(.*?)\*\*/g, "$1") // remove markdown bold
+        .replace(/\*\*(.*?)\*\*/g, "$1")
         .trim();
-
-      console.log("🤖 Bot Reply:", apiResponseText);
 
       updateHistory(apiResponseText);
     } catch (error) {

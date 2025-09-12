@@ -47,7 +47,7 @@ function Header() {
   return (
     <header className={`header ${scrolled ? "scrolled" : ""}`}>
       <div className="logo">
-        <Link to="/" className="logo-text" onClick={handleNavClick}>TravelStay</Link>
+        <Link to="/" className="logo-text" onClick={handleNavClick}>Travelo</Link>
       </div>
 
       <div className="hamburger" onClick={toggleMenu}>

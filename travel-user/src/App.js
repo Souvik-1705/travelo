@@ -7,8 +7,7 @@ import "./App.css";
 import { useDispatch } from "react-redux";
 import { logout, verifyToken } from "./redux/slices/authSlice";
 import ChatbotBox from "./components/ChatbotBox/ChatbotBox";
-
-
+import { fetchCities } from "./redux/slices/citySlice";
 
 
 const Home = lazy(() => import("./pages/Home"));
@@ -33,6 +32,10 @@ function App() {
       dispatch(logout())
     }
   },[dispatch,token]);
+
+  useEffect(()=>{
+    dispatch(fetchCities());
+  },[dispatch]);
   return (
     <div>
     <Router>
