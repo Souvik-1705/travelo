@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/AdminNavbar.css";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutAdmin } from "../redux/slices/authSlice";
+import { logout } from "../redux/slices/authSlice";
 import { markAllRead } from "../redux/slices/bookingSlice";
 import { FaBell, FaBars, FaTimes } from "react-icons/fa";
 
@@ -17,7 +17,7 @@ function AdminNavbar() {
   const dropdownRef = useRef(null);
 
   const handleLogout = () => {
-    dispatch(logoutAdmin());
+    dispatch(logout());
     navigate("/");
   };
 

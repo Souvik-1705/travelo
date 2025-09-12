@@ -3,7 +3,7 @@ import React, { Suspense, lazy, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useDispatch } from "react-redux";
-import { logoutAdmin, verifyToken } from "./redux/slices/authSlice";
+import { logout } from "./redux/slices/authSlice";
 import CityDetailsAdmin from "./pages/CityDetailsAdmin";
 
 
@@ -19,19 +19,14 @@ const Bookings = lazy(() => import("./features/bookings/Bookings"));
 
 function App() {
   const dispatch=useDispatch();
-  const token=localStorage.getItem("adminToken");
+  const token = localStorage.getItem("adminToken");
+  const guest = localStorage.getItem("admin_guest") === "true";
+  useEffect(() => {
+  if (!token && !guest) {
+    dispatch(logout());
+  }
+}, [dispatch, token, guest]);
 
-  useEffect(()=>{
-    if(token){
-      dispatch(verifyToken(token)).unwrap()
-      .catch(() => {
-        dispatch(logoutAdmin());
-      });
-    }
-    else{
-      dispatch(logoutAdmin());
-    }
-  },[dispatch,token]);
   return (
     <Suspense fallback={<p style={{ padding: "2rem" }}>Loading...</p>}>
       <Routes>

@@ -1,125 +1,76 @@
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { FIREBASE_AUTH_URL, FIREBASE_VERIFY_URL } from "../../firebase/config";
 
-export const verifyToken = createAsyncThunk(
-  "auth/verifyToken",
-  async (token, { rejectWithValue }) => {
-    try {
-      const response = await axios.post(FIREBASE_VERIFY_URL, {
-        idToken: token,
-      });
-      const data = response.data;
+const API_KEY = "AIzaSyBv0JR9ylSEjTSJGWj0PTSZwnDYjw5hN-Q";
 
-      return {
-        token,
-        email: data.users[0].email,
-      };
-    } catch (error) {
-      return rejectWithValue("Invalid or expired token");
+export const loginUser = createAsyncThunk("auth/login", async ({ email, password }) => {
+  const res = await axios.post(
+    `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
+    {
+      email,
+      password,
+      returnSecureToken: true,
     }
-  }
-);
-
-export const loginAdmin = createAsyncThunk(
-  "auth/loginAdmin",
-  async ({ email, password }, thunkAPI) => {
-    try {
-      const response = await axios.post(FIREBASE_AUTH_URL, {
-        email,
-        password,
-        returnSecureToken: true,
-      });
-
-      const data = response.data;
-
-      localStorage.setItem("adminToken", data.idToken);
-      localStorage.setItem("adminEmail", data.email);
-      localStorage.setItem("isGuest", "false");
-
-      return {
-        token: data.idToken,
-        email: data.email,
-      };
-    } catch (error) {
-      return thunkAPI.rejectWithValue(
-        error.response?.data?.error?.message || "Login failed"
-      );
-    }
-  }
-);
-
-const initialState = {
-  token: localStorage.getItem("adminToken") || null,
-  email: localStorage.getItem("adminEmail") || null,
-  loading: false,
-  error: null,
-  isGuest: localStorage.getItem("isGuest") === "true",
-};
+  );
+  return res.data;
+});
 
 const authSlice = createSlice({
   name: "auth",
-  initialState,
+  initialState: {
+    token: localStorage.getItem("adminToken") || null,
+    email: localStorage.getItem("adminEmail") || null,
+    userId: localStorage.getItem("adminUserId") || null,
+    guest: localStorage.getItem("admin_guest") === "true",
+    loading: false,
+    error: null,
+  },
   reducers: {
-    logoutAdmin(state) {
+    logout: (state) => {
       state.token = null;
       state.email = null;
-      state.isGuest = false;
-
+      state.userId = null;
+      state.guest = false;
       localStorage.removeItem("adminToken");
       localStorage.removeItem("adminEmail");
-      localStorage.removeItem("isGuest");
+      localStorage.removeItem("adminUserId");
+      localStorage.removeItem("admin_guest");
     },
-
-    
-    loginAsGuest(state) {
-      state.token = "guest_token";
-      state.email = "guest@travelo.com";
-      state.isGuest = true;
-
-      localStorage.setItem("adminToken", "guest_token");
-      localStorage.setItem("adminEmail", "guest@travelo.com");
-      localStorage.setItem("isGuest", "true");
+    guestLogin: (state) => {
+      state.guest = true;
+      localStorage.setItem("admin_guest", "true");
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(verifyToken.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(verifyToken.fulfilled, (state, action) => {
-        state.token = action.payload.token;
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.token = action.payload.idToken;
         state.email = action.payload.email;
-        state.loading = false;
-      })
-      .addCase(verifyToken.rejected, (state, action) => {
-        state.token = null;
-        state.email = null;
-        state.loading = false;
-        state.error = action.payload;
-
-        localStorage.removeItem("adminToken");
-        localStorage.removeItem("adminEmail");
-        localStorage.removeItem("isGuest");
-      })
-
-      .addCase(loginAdmin.pending, (state) => {
-        state.loading = true;
+        state.userId = action.payload.localId;
+        state.guest = false;
+        localStorage.setItem("adminToken", action.payload.idToken);
+        localStorage.setItem("adminEmail", action.payload.email);
+        localStorage.setItem("adminUserId", action.payload.localId);
+        localStorage.removeItem("admin_guest");
         state.error = null;
-      })
-      .addCase(loginAdmin.fulfilled, (state, action) => {
-        state.token = action.payload.token;
-        state.email = action.payload.email;
         state.loading = false;
       })
-      .addCase(loginAdmin.rejected, (state, action) => {
-        state.error = action.payload;
-        state.loading = false;
-      });
+      .addMatcher(
+        (action) => action.type.startsWith("auth/") && action.type.endsWith("/pending"),
+        (state) => {
+          state.loading = true;
+          state.error = null;
+        }
+      )
+      .addMatcher(
+        (action) => action.type.startsWith("auth/") && action.type.endsWith("/rejected"),
+        (state, action) => {
+          state.loading = false;
+          state.error = action.error.message;
+        }
+      );
   },
 });
 
-export const { logoutAdmin, loginAsGuest } = authSlice.actions;
+export const { logout, guestLogin } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,6 +1,7 @@
+// src/pages/Login.js
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { loginAdmin, loginAsGuest } from "../redux/slices/authSlice";
+import { useDispatch } from "react-redux";
+import { loginUser, guestLogin } from "../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import "../styles/Login.css";
 
@@ -9,55 +10,56 @@ function Login() {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error } = useSelector((state) => state.auth);
-
 
   
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const result = await dispatch(loginAdmin({ email, password }));
-    if (result.meta.requestStatus === "fulfilled") {
+  const handleLogin = async () => {
+    try {
+      await dispatch(loginUser({ email, password })).unwrap();
       navigate("/admin/dashboard");
+    } catch (err) {
+      alert("Login failed: " + err.message);
     }
   };
 
+ 
   const handleGuestLogin = () => {
-    dispatch(loginAsGuest());
+    dispatch(guestLogin());
     navigate("/admin/dashboard");
   };
 
   return (
-    <div style={{ padding: "2rem" }} className="login-container">
-      <h2>Admin Login</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="login-container">
+      <div className="login-card">
+        <h2 className="login-title">👨‍💼 Admin Login</h2>
+
         <input
-          type="email"
-          placeholder="Admin Email"
+          className="login-input"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-        /><br /><br />
+          autoComplete="off"
+        />
         <input
-          type="password"
-          placeholder="Admin Password"
+          className="login-input"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-        /><br /><br />
-        <button type="submit" disabled={loading}>Login</button>
-        <hr />
-      <button onClick={handleGuestLogin}
-        style={{
-          marginTop: "10px",
-          padding: "10px 15px",
-          backgroundColor: "#2563eb",
-          color: "#fff",
-          border: "none",
-          borderRadius: "6px",
-          cursor: "pointer",
-        }}>
-        Continue as Guest
-      </button>
-      </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+          type="password"
+          autoComplete="new-password"
+        />
+
+        <button className="login-button" onClick={handleLogin}>
+          Login
+        </button>
+
+        <button
+          className="login-button guest"
+          onClick={handleGuestLogin}
+          style={{ marginTop: "1rem" }}
+        >
+          Guest Login
+        </button>
+      </div>
     </div>
   );
 }
